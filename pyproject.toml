@@ -1,0 +1,13 @@
+[tool.poetry]
+name = "personal-finance"
+version = "0.1.0"
+description = "A Flet application"
+authors = ["Wagner Santos <prog.wagner@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.12"
+flet = "^0.23.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
