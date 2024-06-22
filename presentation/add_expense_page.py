@@ -1,6 +1,7 @@
 import flet as ft
 from datetime import datetime
 from use_cases.add_expense import AddExpense
+from colors import AppColors
 
 class AddExpensePage:
     def __init__(self, add_expense_use_case: AddExpense):
@@ -17,43 +18,65 @@ class AddExpensePage:
         self.notes = None
 
     def create_page(self):
-        self.date = ft.TextField(label="Date", value=self.current_date, hint_text="YYYY-MM-DD", expand=True)
-        self.description = ft.TextField(label="Description", expand=True)
+        self.date = ft.TextField(
+            label="Date", value=self.current_date, hint_text="YYYY-MM-DD",
+            expand=True, bgcolor=AppColors.LIGHT_GRAY.value, color=AppColors.BLUE_GRAY.value
+        )
+        self.description = ft.TextField(
+            label="Description", expand=True, bgcolor=AppColors.LIGHT_GRAY.value, color=AppColors.BLUE_GRAY.value
+        )
         self.category = ft.Dropdown(
             label="Category",
             options=[
-                ft.dropdown.Option("Food"),
-                ft.dropdown.Option("Transport"),
-                ft.dropdown.Option("Entertainment"),
-                ft.dropdown.Option("Electronics"),
-                ft.dropdown.Option("Others"),
+                ft.dropdown.Option("Food", text_style=ft.TextStyle(color=AppColors.BLUE_GRAY.value)),
+                ft.dropdown.Option("Transport", text_style=ft.TextStyle(color=AppColors.BLUE_GRAY.value)),
+                ft.dropdown.Option("Entertainment", text_style=ft.TextStyle(color=AppColors.BLUE_GRAY.value)),
+                ft.dropdown.Option("Electronics", text_style=ft.TextStyle(color=AppColors.BLUE_GRAY.value)),
+                ft.dropdown.Option("Others", text_style=ft.TextStyle(color=AppColors.BLUE_GRAY.value)),
             ],
-            expand=True
+            expand=True, bgcolor=AppColors.LIGHT_GRAY.value
         )
-        self.amount = ft.TextField(label="Amount", keyboard_type=ft.KeyboardType.NUMBER, expand=True)
+        self.amount = ft.TextField(
+            label="Amount", keyboard_type=ft.KeyboardType.NUMBER, expand=True,
+            bgcolor=AppColors.LIGHT_GRAY.value, color=AppColors.BLUE_GRAY.value
+        )
         self.payment_method = ft.Dropdown(
             label="Payment Method",
             options=[
-                ft.dropdown.Option("Credit Card"),
-                ft.dropdown.Option("Debit Card"),
-                ft.dropdown.Option("Cash"),
-                ft.dropdown.Option("Other"),
+                ft.dropdown.Option("Credit Card", text_style=ft.TextStyle(color=AppColors.BLUE_GRAY.value)),
+                ft.dropdown.Option("Debit Card", text_style=ft.TextStyle(color=AppColors.BLUE_GRAY.value)),
+                ft.dropdown.Option("Cash", text_style=ft.TextStyle(color=AppColors.BLUE_GRAY.value)),
+                ft.dropdown.Option("Other", text_style=ft.TextStyle(color=AppColors.BLUE_GRAY.value)),
             ],
-            expand=True
+            expand=True, bgcolor=AppColors.LIGHT_GRAY.value
         )
-        self.installments = ft.TextField(label="Installments", keyboard_type=ft.KeyboardType.NUMBER, expand=True)
-        self.installment_amount = ft.TextField(label="Installment Amount", keyboard_type=ft.KeyboardType.NUMBER, expand=True)
-        self.payment_month = ft.TextField(label="Payment Month", hint_text="MM/YYYY", expand=True)
-        self.notes = ft.TextField(label="Notes", expand=True)
+        self.installments = ft.TextField(
+            label="Installments", keyboard_type=ft.KeyboardType.NUMBER, expand=True,
+            bgcolor=AppColors.LIGHT_GRAY.value, color=AppColors.BLUE_GRAY.value
+        )
+        self.installment_amount = ft.TextField(
+            label="Installment Amount", keyboard_type=ft.KeyboardType.NUMBER, expand=True,
+            bgcolor=AppColors.LIGHT_GRAY.value, color=AppColors.BLUE_GRAY.value
+        )
+        self.payment_month = ft.TextField(
+            label="Payment Month", hint_text="MM/YYYY", expand=True,
+            bgcolor=AppColors.LIGHT_GRAY.value, color=AppColors.BLUE_GRAY.value
+        )
+        self.notes = ft.TextField(
+            label="Notes", expand=True, bgcolor=AppColors.LIGHT_GRAY.value, color=AppColors.BLUE_GRAY.value
+        )
         
-        add_button = ft.ElevatedButton(text="Add Expense", on_click=lambda e: self.add_expense(), expand=True)
+        add_button = ft.ElevatedButton(
+            text="Add Expense", on_click=lambda e: self.add_expense(), expand=True,
+            bgcolor=AppColors.BLUE_PASTEL.value, color=AppColors.LIGHT_GRAY.value
+        )
 
         return ft.Container(
             content=ft.Column(
                 [
-                    ft.Text("Expense Tracker", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM),
+                    ft.Text("Expense Tracker", theme_style=ft.TextThemeStyle.HEADLINE_MEDIUM, color=AppColors.BLUE_GRAY.value),
                     ft.Divider(),
-                    ft.Text("Add New Expense", theme_style=ft.TextThemeStyle.HEADLINE_SMALL),
+                    ft.Text("Add New Expense", theme_style=ft.TextThemeStyle.HEADLINE_SMALL, color=AppColors.BLUE_GRAY.value),
                     ft.Row([self.date, self.description]),
                     ft.Row([self.category, self.amount]),
                     ft.Row([self.payment_method, self.installments]),
@@ -67,8 +90,8 @@ class AddExpensePage:
                 expand=True,
             ),
             padding=20,
-            bgcolor=ft.colors.SURFACE_VARIANT,
-            border_radius=ft.border_radius.all(10),
+            bgcolor=AppColors.LIGHT_GRAY.value,
+            border_radius=10,
             shadow=ft.BoxShadow(
                 spread_radius=2,
                 blur_radius=10,
