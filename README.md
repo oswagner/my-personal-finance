@@ -63,7 +63,10 @@ If you prefer to run the steps manually, follow these instructions:
 ├── use_cases
 │   ├── add_expense.py         # Use case for adding an expense
 │   └── get_expenses.py        # Use case for retrieving expenses
-├── app.py                     # Main application entry point
+├── utils
+│   ├── json_formatter.py      # JSON formatter for logging
+│   └── logger_wrapper.py      # Logger wrapper
+├── main.py                    # Main application entry point
 ├── run.sh                     # Script to set up and run the application
 └── README.md                  # Project documentation
 ```

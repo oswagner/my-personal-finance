@@ -2,10 +2,12 @@ import flet as ft
 from datetime import datetime
 from use_cases.add_expense import AddExpense
 from colors import AppColors
+from utils.logger_wrapper import LoggerWrapper
 
 class AddExpensePage:
-    def __init__(self, add_expense_use_case: AddExpense):
+    def __init__(self, add_expense_use_case: AddExpense, logger: LoggerWrapper):
         self.add_expense_use_case = add_expense_use_case
+        self.logger = logger
         self.current_date = datetime.now().strftime("%Y-%m-%d")
         self.date = None
         self.description = None
@@ -18,6 +20,8 @@ class AddExpensePage:
         self.notes = None
 
     def create_page(self):
+        self.logger.debug({"event": "create_page", "action": "start"})
+
         self.date = ft.TextField(
             label="Date", value=self.current_date, hint_text="YYYY-MM-DD",
             expand=True, bgcolor=AppColors.LIGHT_GRAY.value, color=AppColors.BLUE_GRAY.value
@@ -71,6 +75,8 @@ class AddExpensePage:
             bgcolor=AppColors.BLUE_PASTEL.value, color=AppColors.LIGHT_GRAY.value
         )
 
+        self.logger.debug({"event": "create_page", "action": "end"})
+
         return ft.Container(
             content=ft.Column(
                 [
@@ -100,14 +106,17 @@ class AddExpensePage:
         )
 
     def add_expense(self):
+        self.logger.info({"event": "add_expense", "action": "start"})
         self.add_expense_use_case.execute(
             self.date.value, self.description.value, self.category.value,
             self.amount.value, self.payment_method.value, self.installments.value,
             self.installment_amount.value, self.payment_month.value, self.notes.value
         )
+        self.logger.info({"event": "add_expense", "action": "end"})
         self.reset_fields()
 
     def reset_fields(self):
+        self.logger.debug({"event": "reset_fields", "action": "start"})
         self.date.value = self.current_date
         self.description.value = ""
         self.category.value = ""
@@ -126,3 +135,4 @@ class AddExpensePage:
         self.installment_amount.update()
         self.payment_month.update()
         self.notes.update()
+        self.logger.debug({"event": "reset_fields", "action": "end"})
